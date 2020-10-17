@@ -1,0 +1,64 @@
+.icon {
+  width: 48px;
+  height: 48px;
+  background-size: 32px 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-gradle {
+  background-image: url(gradle.svg);
+}
+
+.icon-dart {
+  background-image: url(dart.svg);
+}
+
+.icon-flutter {
+  background-image: url(flutter.svg);
+}
+
+.icon-googleCloud {
+  background-image: url(googlecloud.svg);
+}
+
+.icon-spring {
+  background-image: url(spring.svg);
+}
+
+.icon-mongo {
+  background-image: url(mongodb.svg);
+}
+
+.icon-thymeleaf {
+  background-image: url(thymeleaf.svg);
+}
+
+.logo-obidex {
+  height: 1.2em;
+  content: url(obidex.svg);
+}
+
+.fa-bootstrap {
+  color: #563d7c;
+}
+
+.fa-html5 {
+  color: #e44d25;
+}
+
+.fa-js-square {
+  color: #e9d44e;
+}
+
+.fa-css3 {
+  color: #254add;
+}
+
+.fa-java {
+ color: #458cc4;
+}
+
+.fa-python {
+ color: #ffd43b;
+}

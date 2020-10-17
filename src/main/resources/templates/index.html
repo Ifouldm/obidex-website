@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-std">
+    <meta charset="UTF-8">
+    <title>Root Page</title>
+</head>
+<body>
+<div th:replace="fragments/banner :: banner-std">
+</div>
+<div class="container-fluid">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="#" th:href="@{/console}">
+            Consoles
+        </a>
+        <a class="list-group-item list-group-item-action" href="#" th:href="@{/bookmarks}">Bookmarks</a>
+        <a class="list-group-item list-group-item-action" href="#" th:href="@{/portfolio}">Portfolio</a>
+        <a class="list-group-item list-group-item-action" href="#">tbc</a>
+        <a class="list-group-item list-group-item-action" href="#">tbc</a>
+        <a class="list-group-item list-group-item-action" href="#">tbc</a>
+        <a class="list-group-item list-group-item-action" href="#">tbc</a>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
+    ...
+</footer>
+</body>
+</html>

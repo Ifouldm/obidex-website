@@ -1,0 +1,121 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-std">
+    <meta charset="UTF-8">
+    <title>Console Page</title>
+</head>
+<body>
+<style>
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-inner {
+    align-middle;
+    height: 600px;
+}
+
+
+
+
+
+</style>
+<div th:replace="fragments/banner :: banner-std">
+</div>
+<div class="alert alert-dark m-3">
+    <h1 class="h3 text-muted">My portfolio</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6" th:each="item, iStat: ${portfolio}">
+            <div class="card p-3 mb-3">
+                <div class="alert alert-dark">
+                    <h4 class="text-center text-muted font-weight-bold mb-0" th:text="${item.title}">Title</h4>
+                </div>
+                <div class="carousel slide" data-ride="carousel" th:id="${'carousel'+iStat.index}">
+                    <ol class="carousel-indicators">
+                        <th:block th:each="image, iStat: ${item.images}">
+                            <li data-slide-to="${iStat.index}" data-target="#carouselIndicators"
+                                th:attr="data-slide-to=${iStat.index}" th:classappend="${iStat.first} ? 'active'"></li>
+                        </th:block>
+                    </ol>
+                    <div class="carousel-inner">
+                        <th:block th:each="image, iStat: ${item.images}">
+                            <div class="carousel-item" th:classappend="${iStat.first} ? 'active'">
+                                <img alt="..." class="d-block img-fluid w-100" src="..." th:src="${image}">
+                            </div>
+                        </th:block>
+                    </div>
+                    <a class="carousel-control-prev" data-slide="prev" role="button"
+                       th:href="${'#carousel'+iStat.index}">
+                        <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" data-slide="next" role="button"
+                       th:href="${'#carousel'+iStat.index}">
+                        <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title font-weight-bold" th:text="${item.title}">Title</h4>
+                    <p class="card-text text-muted" th:utext="${item.description}">Some quick example text to build on
+                        the card
+                        title and make up the bulk of the card's content.</p>
+                    <ul class="list-group pb-3">
+                        <li class="list-group-item d-flex justify-content-between py-1"
+                            th:each="tech: ${item.tech}">
+                            <a class="nav-link" th:href="${tech.getLink()}" th:text="${tech.getName()}">Cras justo
+                                odio</a>
+                            <span class="fa-2x fa-border"
+                                  th:classappend="${tech.getIcon()}"
+                                  th:if="${tech.getIcon() != null}"></span>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary m-1" href="#" th:href="@{${item.githubLink}}"
+                       th:text="'View '+${item.title}+' on Github'">Github</a>
+                    <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
+                       th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-danger m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
+                       th:href="@{/portfolio/delete/{id}(id=${item.id})}"><i class="fas fa-trash-alt"></i></a>
+                    <!-- Button trigger modal -->
+                    <button class="btn btn-primary m-1" data-target="#exampleModal" data-toggle="modal" type="button">
+                        Modal Confirmation
+                    </button>
+                    <!-- Modal -->
+                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                         role="dialog" tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Changes</h5>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to submit these changes?
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                    <button class="btn btn-primary" type="button">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
+    ...
+</footer>
+</body>
+</html>

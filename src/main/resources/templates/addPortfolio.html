@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-std">
+    <meta charset="UTF-8">
+    <title>Console Page</title>
+</head>
+<body>
+<div th:replace="fragments/banner :: banner-std">
+</div>
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+<div class="p-5">
+    <form action="/portfolio/add" enctype="multipart/form-data" method="post" th:object="${portfolio}">
+        <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
+        <input th:attr="name=id,value=${id}" type="hidden"/>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="title">Title</label>
+                <input class="form-control" id="title" name="title" th:field="*{title}" type="text">
+            </div>
+            <div class="form-group col-md-6">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-switch"
+                 th:each="tech_item : ${T(com.obidex.webserver.model.Tech).values()}">
+                <input class="custom-control-input" th:field="*{tech}" th:id="${tech_item}" th:value="${tech_item}"
+                       type="checkbox">
+                <label class="custom-control-label" th:for="${tech_item}" th:text="${tech_item.name}">
+                    Check me out
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                      th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="title">Github link</label>
+            <input class="form-control" id="githubLink" name="githubLink" placeholder="http://github.com/"
+                   th:field="*{githubLink}" type="text">
+        </div>
+        <div class="custom-file mb-3">
+            <input class="custom-file-input" id="files" multiple name="files" type="file">
+            <label class="custom-file-label" for="files">Choose file</label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Add Portfolio</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
+    ...
+</footer>
+</body>
+</html>

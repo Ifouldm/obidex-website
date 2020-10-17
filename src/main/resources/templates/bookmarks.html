@@ -1,0 +1,87 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-std">
+    <meta charset="UTF-8">
+    <title>Root Page</title>
+</head>
+<body>
+<div th:replace="fragments/banner :: banner-std">
+</div>
+</div>
+<div class="alert alert-dark m-3">
+    <h1 class="h3 text-muted">Useful Resources</h1>
+</div>
+<div class="m-3 align-middle">
+    <form action="#" class="form-inline" method="post" sec:authorize="hasRole('ROLE_ADMIN')"
+          th:action="@{/bookmarks/add}" th:object="${bookmark}">
+        <div class="form-inline">
+            <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
+            <div class="input-group">
+                <label th:for="*{url}">Website Address:</label>
+                <input class="form-control mx-3" placeholder="http://example.com" th:field="*{url}" type="text">
+            </div>
+            <div class="input-group">
+                <label th:for="*{name}">Website Name:</label>
+                <input class="form-control mx-3" placeholder="example" th:field="*{name}" type="text">
+            </div>
+            <button class="btn btn-primary mx-3" type="submit">Add Bookmark</button>
+        </div>
+    </form>
+</div>
+<div class="alert alert-warning m-2" role="alert" th:if="${#lists.isEmpty(bookmarks)}">No Bookmarks to display</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-3 mb-3" th:each="bookmark: ${bookmarks}">
+            <div class="card p-3">
+                <a th:href="@{${bookmark.url}}">
+                    <img alt="Card image cap" class="card-img-top" src="..." th:src="@{'uploads/'+${bookmark.image}}">
+                </a>
+                <div class="card-body pb-0">
+                    <h5 class="card-title" th:text="${bookmark.name}">Card title</h5>
+                    <p class="card-text" th:text="${bookmark.description}">Some quick example text to build on the card
+                        title and make up the bulk of the card's content.</p>
+                    <a class="btn btn-primary btn-block my-1" href="#" th:href="@{${bookmark.url}}"
+                       th:text="${bookmark.name}">Go somewhere</a>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="#"
+                               sec:authorize="hasRole('ROLE_ADMIN')"
+                               th:href="@{/bookmarks/add/{id}(id=${bookmark.id})}"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger m-0 btn-block"
+                               href="#"
+                               sec:authorize="hasRole('ROLE_ADMIN')"
+                               th:href="@{/bookmarks/delete/{id}(id=${bookmark.id})}"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${!bookmarks.hasPrevious() ? 'disabled' : '' }">
+                <a class="page-link" th:href="@{/bookmarks(page=${bookmarks.getNumber()})}">Previous</a>
+            </li>
+            <th:block th:each="pageNumber: ${#numbers.sequence(1, bookmarks.getTotalPages())}">
+                <li class="page-item" th:classappend="${bookmarks.getNumber()} == ${pageNumber} -1 ? 'active' : ''">
+                    <a class="page-link" href="#" th:href="@{/bookmarks(page=${pageNumber})}"
+                       th:text="${pageNumber}">1</a>
+                </li>
+            </th:block>
+            <li class="page-item" th:classappend="${!bookmarks.hasNext() ? 'disabled' : '' }">
+                <a class="page-link" href="#" th:href="@{/bookmarks(page=${bookmarks.getNumber()+2})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
+    ...
+</footer>
+</body>
+</html>
