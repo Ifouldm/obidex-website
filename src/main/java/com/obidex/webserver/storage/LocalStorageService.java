@@ -59,7 +59,7 @@ public class LocalStorageService implements StorageService {
 
     @Override
     public Path load(String filename) {
-        return Path.of(directory.toString(), filename);
+        return directory.resolve(filename);
     }
 
     @Override

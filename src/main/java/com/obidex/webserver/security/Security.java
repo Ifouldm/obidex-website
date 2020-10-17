@@ -42,7 +42,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/", true)
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds((int) Duration.ofDays(31).toSeconds());
+                .tokenValiditySeconds((int) Duration.ofDays(31).getSeconds());
     }
 
     @Override
