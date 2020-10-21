@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header-std">
@@ -20,11 +21,6 @@
     align-middle;
     height: 600px;
 }
-
-
-
-
-
 </style>
 <div th:replace="fragments/banner :: banner-std">
 </div>
@@ -33,7 +29,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-6" th:each="item, iStat: ${portfolio}">
+        <div class="col-12 col-lg-6 " th:each="item, iStat: ${portfolio}">
             <div class="card p-3 mb-3">
                 <div class="alert alert-dark">
                     <h4 class="text-center text-muted font-weight-bold mb-0" th:text="${item.title}">Title</h4>

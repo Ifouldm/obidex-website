@@ -22,10 +22,13 @@ public class BookmarkService {
     private ScreenshotService screenshotService;
 
     public void save(Bookmark bookmark) {
-        String imageloc = screenshotService.getScreenshot(bookmark.getUrl(), bookmark.getName());
-        bookmark.setImage(imageloc);
+        // If screenshot does not exist, fetch one.
+        if (bookmark.getImage() == null) {
+            String imageloc = screenshotService.getScreenshot(bookmark.getUrl(), bookmark.getName());
+            bookmark.setImage(imageloc);
+            log.info("Screenshot taken: {}", imageloc);
+        }
         repository.save(bookmark);
-        log.info("Screenshot taken: {}", imageloc);
     }
 
     public Page<Bookmark> findAll(int pageNo, int size) {

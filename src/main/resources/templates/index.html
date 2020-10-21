@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header-std">
     <meta charset="UTF-8">
@@ -9,6 +10,82 @@
 <div th:replace="fragments/banner :: banner-std">
 </div>
 <div class="container-fluid">
+    <div class="alert alert-info">
+        <h3>Introduction</h3>
+        <p>
+            My name is Matthew Ifould I am a Software Engineering graduate from the <a
+                href="https://www.brighton.ac.uk/">University of Brighton</a>.
+        </p>
+        <p>
+            I have been working in sales and supervisory roles since I left university but I recently decided to leave
+            my
+            job this June to re-educate myself in software engineering with a goal of getting a position as an
+            application developer. Since then I have spent typical working hours studying new technologies
+            using online learning as well as updating my existing experience in programming languages I was already
+            familiar with. I have completed several online courses and certifications during this time.
+            I have also been developing hobby projects using this acquired knowledge, which are available to view on the
+            <a href="/portfolio">portfolio</a> section of this website.
+        </p>
+        <p>
+            I have taken a particular interest in mobile and web related development and decided to learn the Flutter
+            framework and Dart language to
+            simultaneously develop native applications in both IOS and Android. I have used various libraries and APIs
+            to develop
+            several applications giving me a good knowledge of reactive development as well as tools and resources. I am
+            however still interested in developing my knowledge of platform specific development which I am currently
+            working on.
+        </p>
+        <p>
+            One of my aims while educating myself was to get a broader understanding of fundamentals, architectures and
+            design patterns which is why I decided to learn the Spring Framework, this gave me knowledge of many new (to
+            me at least) concepts, such as Inversion of Control, MVC, ORM, RESTful services.
+        </p>
+
+        <ul title="Languages & Technologies">
+            <li>Java</li>
+            <li>Python</li>
+            <li>Dart</li>
+            <li>MongoDB</li>
+            <li>HTML, CSS & JavaScript</li>
+            <li>SQL</li>
+            <li>Google Cloud & Firebase</li>
+            <li>AWS</li>
+        </ul>
+
+        <ul title="Libraries & Frameworks">
+            <li>Spring:
+                <ul>
+                    <li>Spring MVC</li>
+                    <li>Spring Web</li>
+                    <li>Spring Security</li>
+                    <li>Swagger</li>
+                    <li>Actuator</li>
+                </ul>
+            </li>
+            <li>JUnit</li>
+            <li>Lombok</li>
+            <li>Gradle</li>
+            <li>Maven</li>
+            <li>Django</li>
+            <li>Flutter:
+                <ul>
+                    <li>Firebase Cloud Firestore</li>
+                    <li>Firebase Auth</li>
+                    <li>Firebase ML</li>
+                    <li>Firebase Auth</li>
+                </ul>
+            </li>
+            <li>Bootstrap, Bulma</li>
+        </ul>
+
+        <h3>Matthew Ifould BSc (Hons) Software Engineering</h3>
+        <a href="mailto:ifouldm@gmail@@com"
+           onmouseover="this.href=this.href.replace('@@','.')"><span class="far fa-3x fa-envelope"></span></a>
+        <a href="https://www.linkedin.com/in/matthew-ifould-84809b1b5/"><span
+                class="fab fa-3x fa-linkedin-in"></span></a>
+
+
+    </div>
     <div class="list-group">
         <a class="list-group-item list-group-item-action" href="#" th:href="@{/console}">
             Consoles

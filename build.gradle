@@ -19,9 +19,12 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	compile "org.springframework.boot:spring-boot-starter-security"
 	compile("org.springframework.boot:spring-boot-starter-data-rest")
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

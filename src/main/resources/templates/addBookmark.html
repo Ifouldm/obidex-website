@@ -13,17 +13,27 @@
     <h2 th:text="${message}"/>
 </div>
 <div class="p-5">
-    <form action="/bookmarks/add" enctype="multipart/form-data" method="post" th:object="${bookmark}">
+    <form action="/bookmarks/add" class="needs-validation" enctype="multipart/form-data" method="post" novalidate
+          th:object="${bookmark}">
         <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
         <input th:attr="name=id,value=${id}" type="hidden"/>
         <form>
             <div class="form-group">
                 <label for="siteurl">Website Address</label>
-                <input class="form-control" id="siteurl" placeholder="http://example.com" th:field="*{url}" type="text">
+                <input class="form-control" id="siteurl" placeholder="http://example.com" required th:field="*{url}"
+                       type="text">
+                <div class="invalid-feedback">Please enter a url.</div>
+            </div>
+            <div class="form-group" th:if="${bookmark.image != null}">
+                <label for="image">Image Url</label>
+                <input class="form-control" id="image" placeholder="http://imgur.com/x" required th:field="*{image}"
+                       type="text">
+                <div class="invalid-feedback">Please enter an imageurl.</div>
             </div>
             <div class="form-group">
                 <label for="sitename">Website Name</label>
-                <input class="form-control" id="sitename" placeholder="example" th:field="*{name}" type="text">
+                <input class="form-control" id="sitename" placeholder="example" required th:field="*{name}" type="text">
+                <div class="invalid-feedback">Please enter a website name.</div>
             </div>
             <div class="form-group">
                 <label for="sitename">Description</label>

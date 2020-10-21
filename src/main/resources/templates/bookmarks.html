@@ -14,30 +14,28 @@
 <div class="alert alert-dark m-3">
     <h1 class="h3 text-muted">Useful Resources</h1>
 </div>
-<div class="m-3 align-middle">
-    <form action="#" class="form-inline" method="post" sec:authorize="hasRole('ROLE_ADMIN')"
-          th:action="@{/bookmarks/add}" th:object="${bookmark}">
-        <div class="form-inline">
-            <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
-            <div class="input-group">
-                <label th:for="*{url}">Website Address:</label>
-                <input class="form-control mx-3" placeholder="http://example.com" th:field="*{url}" type="text">
-            </div>
-            <div class="input-group">
-                <label th:for="*{name}">Website Name:</label>
-                <input class="form-control mx-3" placeholder="example" th:field="*{name}" type="text">
-            </div>
-            <button class="btn btn-primary mx-3" type="submit">Add Bookmark</button>
+<div class="alert alert-secondary my-3" sec:authorize="hasRole('ROLE_ADMIN')">
+    <form action="#" class="form-inline justify-content-center needs-validation" method="post"
+          novalidate th:action="@{/bookmarks/add}" th:object="${bookmark}">
+        <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
+        <div class="input-group">
+            <label th:for="*{url}">Website Address:</label>
+            <input class="form-control mx-3" placeholder="http://example.com" required th:field="*{url}" type="text">
         </div>
+        <div class="input-group">
+            <label th:for="*{name}">Website Name:</label>
+            <input class="form-control mx-3" placeholder="example" required th:field="*{name}" type="text">
+        </div>
+        <button class="btn btn-primary mx-3" type="submit">Add Bookmark</button>
     </form>
 </div>
 <div class="alert alert-warning m-2" role="alert" th:if="${#lists.isEmpty(bookmarks)}">No Bookmarks to display</div>
-<div class="container">
+<div class="container" th:if="${!#lists.isEmpty(bookmarks)}">
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-3 mb-3" th:each="bookmark: ${bookmarks}">
             <div class="card p-3">
                 <a th:href="@{${bookmark.url}}">
-                    <img alt="Card image cap" class="card-img-top" src="..." th:src="@{'uploads/'+${bookmark.image}}">
+                    <img alt="Card image cap" class="card-img-top" src="..." th:src="@{${bookmark.image}}">
                 </a>
                 <div class="card-body pb-0">
                     <h5 class="card-title" th:text="${bookmark.name}">Card title</h5>

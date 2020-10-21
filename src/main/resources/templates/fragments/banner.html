@@ -22,16 +22,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
+                <li class="nav-item" th:classappend="${#httpServletRequest.requestURI.contains('console')} ? active">
                     <a class="nav-link" href="#" th:href="@{/console}">Console DB</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:classappend="${#httpServletRequest.requestURI.contains('portfolio')} ? active">
                     <a class="nav-link" href="#" th:href="@{/portfolio}">Portfolio</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:classappend="${#httpServletRequest.requestURI.contains('bookmark')} ? active">
                     <a class="nav-link" href="#" th:href="@{/bookmarks}">Bookmarks</a>
                 </li>
             </ul>

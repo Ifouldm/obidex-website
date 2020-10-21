@@ -18,12 +18,14 @@ public class PortfolioService {
     StorageService storageService;
 
     public void addPortfolio(Portfolio portfolio, MultipartFile[] files) {
-        List<String> images = new ArrayList<>();
-        for (MultipartFile file : files) {
-            storageService.store(file);
-            images.add("uploads/" + file.getOriginalFilename());
+        if (portfolio.getImages() == null) {
+            List<String> images = new ArrayList<>();
+            for (MultipartFile file : files) {
+                storageService.store(file);
+                images.add("uploads/" + file.getOriginalFilename());
+            }
+            portfolio.setImages(images.toArray(new String[images.size()]));
         }
-        portfolio.setImages(images.toArray(new String[images.size()]));
         portfolioRepository.save(portfolio);
     }
 
