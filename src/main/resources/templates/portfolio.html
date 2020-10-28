@@ -25,7 +25,7 @@
 <div th:replace="fragments/banner :: banner-std">
 </div>
 <div class="alert alert-dark m-3">
-    <h1 class="h3 text-muted">My portfolio</h1>
+    <h1 class="h3 m-0 text-muted">My portfolio</h1>
 </div>
 <div class="container">
     <div class="row">
@@ -62,8 +62,7 @@
                 <div class="card-body">
                     <h4 class="card-title font-weight-bold" th:text="${item.title}">Title</h4>
                     <p class="card-text text-muted" th:utext="${item.description}">Some quick example text to build on
-                        the card
-                        title and make up the bulk of the card's content.</p>
+                        the card title and make up the bulk of the card's content.</p>
                     <ul class="list-group pb-3">
                         <li class="list-group-item d-flex justify-content-between py-1"
                             th:each="tech: ${item.tech}">
@@ -78,38 +77,44 @@
                        th:text="'View '+${item.title}+' on Github'">Github</a>
                     <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
                        th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>
-                    <a class="btn btn-danger m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
-                       th:href="@{/portfolio/delete/{id}(id=${item.id})}"><i class="fas fa-trash-alt"></i></a>
-                    <!-- Button trigger modal -->
-                    <button class="btn btn-primary m-1" data-target="#exampleModal" data-toggle="modal" type="button">
-                        Modal Confirmation
+                    <button class="btn btn-danger m-1" data-target="#deleteModal" data-toggle="modal"
+                            sec:authorize="hasRole('ROLE_ADMIN')" th:attr="data-id=${item.id}"
+                            type="button"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="deleteModal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-danger">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Changes</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- Modal -->
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
-                         role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Changes</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to submit these changes?
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                    <button class="btn btn-primary" type="button">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <a class="btn btn-danger" type="button">Delete Item</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('id') // Extract info from data-* attributes
+        var modal = $(this)
+        modal.find('.btn-danger').attr('href', '/portfolio/delete/'+recipient)
+    })
+
+</script>
 <footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
     ...
 </footer>

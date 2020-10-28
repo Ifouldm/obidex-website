@@ -32,5 +32,7 @@ out/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/application.properties
+
+### Ignore ###
 /src/main/resources/static/uploads/
+/src/main/resources/application-dev.properties

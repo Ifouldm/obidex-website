@@ -14,8 +14,8 @@ public enum Tech {
     MONGO_DB("Mongo DB", "icon icon-mongo", "https://www.mongodb.com/"),
     THYMELEAF("Thymeleaf", "icon icon-thymeleaf", "https://www.thymeleaf.org/"),
     HTML("HTML 5", "fab fa-html5", "https://www.w3.org/"),
-    JAVASCRIPT("JavaScript", "fab fa-js-square"),
-    CSS("CSS", "fab fa-css3"),
+    JAVASCRIPT("JavaScript", "fab fa-js-square", "#"),
+    CSS("CSS", "fab fa-css3", "#"),
     GOOGLE_CLOUD("Google Cloud", "icon icon-googleCloud", "https://cloud.google.com/"),
     GRADLE("Gradle", "icon icon-gradle", "https://gradle.org/"),
     PYTHON("Python", "fab fa-python", "https://www.python.org/");
