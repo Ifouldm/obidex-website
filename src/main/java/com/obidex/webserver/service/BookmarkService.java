@@ -48,4 +48,8 @@ public class BookmarkService {
     public Bookmark findById(String id) {
         return repository.findById(id).orElse(new Bookmark());
     }
+
+    public Object getBookmarkLoc() {
+        return screenshotService.getLocation();
+    }
 }

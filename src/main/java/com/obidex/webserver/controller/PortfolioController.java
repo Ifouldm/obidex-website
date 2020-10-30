@@ -17,11 +17,14 @@ public class PortfolioController {
     private static final String PORTFOLIO = "portfolio";
     private static final String PORTFOLIO_PAGE = "portfolio";
     private static final String ADD_PORTFOLIO_PAGE = "addPortfolio";
+    private static final String BUCKET_LOC = "bucketLoc";
+
     @Autowired
     PortfolioService portfolioService;
 
     @GetMapping({"", "/"})
     public String portfolio(Model model) {
+        model.addAttribute(BUCKET_LOC, portfolioService.getImagePath());
         model.addAttribute(PORTFOLIO, portfolioService.findAll());
         return PORTFOLIO_PAGE;
     }

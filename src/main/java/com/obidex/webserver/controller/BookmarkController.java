@@ -50,6 +50,7 @@ public class BookmarkController {
         log.trace("Bookmarks reached");
         model.addAttribute(BOOKMARKS, bookmarkService.findAll(page, 8));
         model.addAttribute(BOOKMARK, new Bookmark());
+        model.addAttribute("bookmarkLoc", bookmarkService.getBookmarkLoc());
         return BOOKMARK_PAGE;
     }
 

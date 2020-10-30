@@ -22,7 +22,7 @@ public class PortfolioService {
             List<String> images = new ArrayList<>();
             for (MultipartFile file : files) {
                 storageService.store(file);
-                images.add("uploads/" + file.getOriginalFilename());
+                images.add(file.getOriginalFilename());
             }
             portfolio.setImages(images.toArray(new String[images.size()]));
         }
@@ -43,5 +43,9 @@ public class PortfolioService {
 
     public void deleteById(String id) {
         portfolioRepository.deleteById(id);
+    }
+
+    public String getImagePath() {
+        return storageService.getFullPath();
     }
 }

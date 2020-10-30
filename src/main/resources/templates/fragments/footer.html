@@ -9,7 +9,7 @@
 </head>
 <body>
 <footer class="footer mt-3" th:fragment="footer-std">
-    <div class="p-3" style="background-image: url('/images/banner.jpg');">
+    <div class="p-3" style="background-image: url('/images/banner.jpg'); background-size: cover;">
         <p class="h3 text-white">&#169; Matthew Ifould 2020</p>
         <div class="lead text-white" sec:authorize="isAuthenticated()">
             Authenticated as <span sec:authentication="name"></span>

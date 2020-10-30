@@ -9,7 +9,8 @@
 </head>
 <body>
 <div th:fragment="banner-std">
-    <div class="jumbotron jumbotron-fluid mb-0" style="background-image: url('/images/banner.jpg');">
+    <div class="jumbotron jumbotron-fluid mb-0"
+         style="background-image: url('/images/banner.jpg'); background-size: cover;">
         <a class="nounderline" href="/">
             <p class="display-4 text-white ml-4"><i class="logo-obidex align-text-bottom m-n1"></i>bidex.com</p>
         </a>
@@ -73,7 +74,7 @@
                                     <input aria-label="Remember Me?" type="checkbox">
                                 </div>
                             </div>
-                            <input aria-label="Remember Me?" class="form-control" readonly="true" type="text"
+                            <input aria-label="Remember Me?" class="form-control" readonly type="text"
                                    value="Remember Me?">
                         </div>
                     </div>

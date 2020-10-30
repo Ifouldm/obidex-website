@@ -44,7 +44,7 @@
                     <div class="carousel-inner">
                         <th:block th:each="image, iStat: ${item.images}">
                             <div class="carousel-item" th:classappend="${iStat.first} ? 'active'">
-                                <img alt="..." class="d-block img-fluid w-100" src="..." th:src="${image}">
+                                <img alt="..." class="d-block img-fluid w-100" src="..." th:src="${bucketLoc}+${image}">
                             </div>
                         </th:block>
                     </div>
