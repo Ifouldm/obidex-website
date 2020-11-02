@@ -52,7 +52,7 @@ public class StorageServiceImpl implements StorageService {
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, region))
                 .build();
         fullpath = "http://" + bucketName + '.' + endpoint + '/';
-        log.info("Portfolio bucket path registered to: {}", fullpath);
+        log.info("S3 bucket path registered to: {}", fullpath);
     }
 
     private File convertMultiPartToFile(MultipartFile file) throws IOException {
@@ -74,6 +74,16 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void init() {
         //init performed in PostConstruct
+    }
+
+    @Override
+    public void store(File file, String filename) {
+        try {
+            s3client.putObject(bucketName, filename, file);
+        } catch (Exception e) {
+            log.error("Unable to convert multipart file into file ");
+            e.printStackTrace();
+        }
     }
 
     @Override

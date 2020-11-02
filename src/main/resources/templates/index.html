@@ -78,12 +78,15 @@
         </ul>
 
         <h3>Matthew Ifould BSc (Hons) Software Engineering</h3>
-        <a href="mailto:matti@obidex@@com"
-           onmouseover="this.href=this.href.replace('@@','.')"><span class="far fa-3x fa-border fa-envelope"></span></a>
-        <a href="https://www.linkedin.com/in/matthew-ifould-84809b1b5/"><span
-                class="fab fa-3x fa-border fa-linkedin-in"></span></a>
-
-
+        <a href="mailto:matti@obidex@@com" onmouseover="this.href=this.href.replace('@@','.')">
+            <span class="far fa-3x fa-border fa-envelope"></span>
+        </a>
+        <a href="https://www.linkedin.com/in/matthew-ifould-84809b1b5/">
+            <span class="fab fa-3x fa-border fa-linkedin-in"></span>
+        </a>
+        <a href="https://www.github.com/ifouldm">
+            <span class="fab fa-3x fa-border fa-github"></span>
+        </a>
     </div>
     <div class="list-group">
         <a class="list-group-item list-group-item-action" href="#" th:href="@{/console}">
@@ -91,10 +94,6 @@
         </a>
         <a class="list-group-item list-group-item-action" href="#" th:href="@{/bookmarks}">Bookmarks</a>
         <a class="list-group-item list-group-item-action" href="#" th:href="@{/portfolio}">Portfolio</a>
-        <a class="list-group-item list-group-item-action" href="#">tbc</a>
-        <a class="list-group-item list-group-item-action" href="#">tbc</a>
-        <a class="list-group-item list-group-item-action" href="#">tbc</a>
-        <a class="list-group-item list-group-item-action" href="#">tbc</a>
     </div>
 </div>
 <footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">

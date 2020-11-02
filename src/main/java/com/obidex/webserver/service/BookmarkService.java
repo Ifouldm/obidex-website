@@ -49,7 +49,7 @@ public class BookmarkService {
         return repository.findById(id).orElse(new Bookmark());
     }
 
-    public Object getBookmarkLoc() {
+    public String getBookmarkLoc() {
         return screenshotService.getLocation();
     }
 }

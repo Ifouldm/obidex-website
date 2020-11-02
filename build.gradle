@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.890'
+	compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.890'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-data-rest'
