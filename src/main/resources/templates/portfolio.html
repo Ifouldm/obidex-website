@@ -8,20 +8,6 @@
     <title>Console Page</title>
 </head>
 <body>
-<style>
-.carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
-}
-
-.carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300f' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
-}
-
-.carousel-inner {
-    align-middle;
-    height: 600px;
-}
-</style>
 <div th:replace="fragments/banner :: banner-std">
 </div>
 <div class="alert alert-dark m-3">
@@ -73,13 +59,15 @@
                                   th:if="${tech.getIcon() != null}"></span>
                         </li>
                     </ul>
-                    <a class="btn btn-primary m-1" href="#" th:href="@{${item.githubLink}}"
-                       th:text="'View '+${item.title}+' on Github'">Github</a>
-                    <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
-                       th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>
-                    <button class="btn btn-danger m-1" data-target="#deleteModal" data-toggle="modal"
-                            sec:authorize="hasRole('ROLE_ADMIN')" th:attr="data-id=${item.id}"
-                            type="button"><i class="fas fa-trash-alt"></i></button>
+                    <div class="button-bar">
+                        <a class="btn btn-primary m-1" href="#" th:href="@{${item.githubLink}}"
+                           th:text="'View '+${item.title}+' on Github'">Github</a>
+                        <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
+                           th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger m-1" data-target="#deleteModal" data-toggle="modal"
+                                sec:authorize="hasRole('ROLE_ADMIN')" th:attr="data-id=${item.id}"
+                                type="button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

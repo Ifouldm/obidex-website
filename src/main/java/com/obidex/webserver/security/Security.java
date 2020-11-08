@@ -39,7 +39,9 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/", true)
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/", false)
                 .and()
                 .rememberMe()
                 .tokenValiditySeconds((int) Duration.ofDays(31).getSeconds());

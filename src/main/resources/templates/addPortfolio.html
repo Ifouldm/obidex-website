@@ -8,9 +8,10 @@
 </head>
 <body>
 <div th:replace="fragments/banner :: banner-std">
+    Banner
 </div>
 <div th:if="${message}">
-    <h2 th:text="${message}"/>
+    <h2 th:text="${message}">Message</h2>
 </div>
 <div class="p-5">
     <form action="/portfolio/add" class="needs-validation" enctype="multipart/form-data" method="post" novalidate

@@ -27,6 +27,13 @@ public class ScreenshotService {
     @Value("${screenshot.options}")
     private String options;
 
+    /**
+     * Take a screenshot of the given url and store it using the filename provided
+     *
+     * @param subjecturl URL of the website to be captured
+     * @param name       Filename to store screenshot
+     * @return full filename with extension for the stored file
+     */
     public String getScreenshot(String subjecturl, String name) {
         String filename = name.substring(0, Math.min(name.length(), 10));
         URL url = null;
@@ -58,6 +65,11 @@ public class ScreenshotService {
         return filename + ".png";
     }
 
+    /**
+     * Returns the end point for the storage location
+     *
+     * @return the end point for the storage location
+     */
     public String getLocation() {
         return storageService.getFullPath();
     }
