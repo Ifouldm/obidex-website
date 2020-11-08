@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.Region;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -43,6 +44,9 @@ public class StorageServiceImpl implements StorageService {
     @Value("${aws.secretKey}")
     private String secretKey;
 
+    /**
+     * Initialise AWS client for storage and populate the endpoint for stored data.
+     */
     @PostConstruct
     public void serviceInit() {
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
@@ -55,6 +59,13 @@ public class StorageServiceImpl implements StorageService {
         log.info("S3 bucket path registered to: {}", fullpath);
     }
 
+    /**
+     * Generate a File from a MultipartFile for storage in S3 data bucket
+     *
+     * @param file The MultipartFile to be stored
+     * @return The File result of the MultipartFile
+     * @throws IOException
+     */
     private File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
         FileOutputStream fos = new FileOutputStream(convFile);
@@ -63,11 +74,16 @@ public class StorageServiceImpl implements StorageService {
         return convFile;
     }
 
+    /**
+     * Generates a list of stored filenames within the associated bucket in String format
+     *
+     * @return List of String filenames
+     */
     private List<String> getFileList() {
         ListObjectsV2Result bucketList = s3client.listObjectsV2(bucketName);
         return bucketList.getObjectSummaries()
                 .stream()
-                .map(file -> file.getKey())
+                .map(S3ObjectSummary::getKey)
                 .collect(Collectors.toList());
     }
 
@@ -76,6 +92,12 @@ public class StorageServiceImpl implements StorageService {
         //init performed in PostConstruct
     }
 
+    /**
+     * Stores the given {@link File} in S3 using the given filename as the file maybe a temp file with a arbitrary filename
+     *
+     * @param file     The {@link File} to be stored
+     * @param filename The filename to use
+     */
     @Override
     public void store(File file, String filename) {
         try {
@@ -86,6 +108,11 @@ public class StorageServiceImpl implements StorageService {
         }
     }
 
+    /**
+     * Stores the given {@link MultipartFile} in S3 using the current filename
+     *
+     * @param file The {@link MultipartFile} to be stored
+     */
     @Override
     public void store(MultipartFile file) {
         try {
@@ -98,12 +125,22 @@ public class StorageServiceImpl implements StorageService {
         }
     }
 
+    /**
+     * The stream of {@link Path} urls for the key(s) (filename(s)) within the bucket
+     *
+     * @return A Stream of {@link Path}s
+     */
     @Override
     public Stream<Path> loadAll() {
-        // return the stream of urls for each key (filename) within the bucket
-        return getFileList().stream().map(file -> load(file));
+        return getFileList().stream().map(this::load);
     }
 
+    /**
+     * Returns a {@link Path} associated with the given filename
+     *
+     * @param filename The filename to be looked up
+     * @return the {@link java.nio.file.Path} for the given filename
+     */
     @Override
     public Path load(String filename) {
         if (!getFileList().contains(filename))
@@ -118,6 +155,12 @@ public class StorageServiceImpl implements StorageService {
         return null;
     }
 
+    /**
+     * The resource associated with the given filename
+     *
+     * @param filename The filename to be looked up
+     * @return The {@link Resource} associated with the given filename
+     */
     @Override
     public Resource loadAsResource(String filename) {
         if (!getFileList().contains(filename))
@@ -125,11 +168,19 @@ public class StorageServiceImpl implements StorageService {
         return new UrlResource(s3client.getUrl(bucketName, filename));
     }
 
+    /**
+     * Delete all files in the current bucket
+     */
     @Override
     public void deleteAll() {
         getFileList().forEach(file -> s3client.deleteObject(bucketName, file));
     }
 
+    /**
+     * The full path of the current bucket
+     *
+     * @return The full path of the current bucket
+     */
     @Override
     public String getFullPath() {
         return fullpath;

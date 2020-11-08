@@ -35,9 +35,10 @@
                     <a class="nav-link" href="#" th:href="@{/bookmarks}">Bookmarks</a>
                 </li>
             </ul>
-            <form class="form-inline">
-                <div class="input-group" sec:authorize="isAuthenticated()">
-                    <a class="btn btn-primary" href="/logout" role="button">Logout</a>
+            <form action="/logout" class="form-inline" method="post" sec:authorize="isAuthenticated()">
+                <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
+                <div class="input-group">
+                    <button class="btn btn-primary" type="submit">Logout</button>
                 </div>
             </form>
             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"

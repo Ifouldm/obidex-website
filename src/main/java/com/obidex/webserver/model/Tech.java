@@ -3,6 +3,9 @@ package com.obidex.webserver.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * A Enum for the available technologies that can be associated with projects etc.
+ */
 @Getter
 @AllArgsConstructor
 public enum Tech {

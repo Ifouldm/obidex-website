@@ -21,6 +21,12 @@ public class BookmarkController {
     @Autowired
     BookmarkService bookmarkService;
 
+    /**
+     * @param bookmark      The bookmmark object to be added
+     * @param bindingResult Result of binding success
+     * @param model
+     * @return Redirect to Bookmarks list
+     */
     @PostMapping("/add")
     public String addBookmark(@ModelAttribute Bookmark bookmark, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
@@ -32,12 +38,25 @@ public class BookmarkController {
         return "redirect:/" + BOOKMARK_PAGE;
     }
 
+    /**
+     * Form to add a new Bookmark
+     *
+     * @param model The model to which a blank bookmark is added
+     * @return The add bookmark form
+     */
     @GetMapping("/add")
     public String newBookmark(Model model) {
         model.addAttribute(new Bookmark());
         return ADD_BOOKMARK_PAGE;
     }
 
+    /**
+     * Form to edit an existing Bookmark
+     *
+     * @param id    The id of the bookmark to be amended
+     * @param model The model to which the bookmark will be added
+     * @return the Add bookmark form
+     */
     @GetMapping("/add/{id}")
     public String editBookmark(@PathVariable String id, Model model) {
         Bookmark bookmark = bookmarkService.findById(id);
@@ -45,6 +64,13 @@ public class BookmarkController {
         return ADD_BOOKMARK_PAGE;
     }
 
+    /**
+     * The main bookmarks page containing all of the Bookmarks paginated and listed Alphabetically.
+     *
+     * @param model The model to which the list of bookmarks is added
+     * @param page  The current page
+     * @return The bookmarks list
+     */
     @GetMapping({"/", ""})
     public String getBookmarks(Model model, @RequestParam(defaultValue = "1") int page) {
         log.trace("Bookmarks reached");
@@ -54,6 +80,12 @@ public class BookmarkController {
         return BOOKMARK_PAGE;
     }
 
+    /**
+     * Delete a given Bookmark
+     *
+     * @param id The id of the Bookmark to be deleted
+     * @return Redirect to the Bookmark list
+     */
     @GetMapping("/delete/{id}")
     public String deleteBookmark(@PathVariable String id) {
         log.trace("Delete bookmark: {}", id);
