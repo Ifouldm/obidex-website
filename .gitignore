@@ -36,3 +36,4 @@ out/
 ### Ignore ###
 /src/main/resources/static/uploads/
 /src/main/resources/application.properties
+/src/main/resources/application-dev.properties
