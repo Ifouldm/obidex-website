@@ -16,5 +16,6 @@ public class Portfolio {
     Tech[] tech;
     String description;
     String githubLink;
+    String productLink;
 }
 

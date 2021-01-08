@@ -47,6 +47,12 @@
                    required th:field="*{githubLink}" type="text">
             <div class="invalid-feedback">Please enter a Github link.</div>
         </div>
+        <div class="form-group">
+            <label for="productLink">Product link</label>
+            <input class="form-control" id="productLink" name="productLink" placeholder="https://ifouldm.github.io/"
+                   required th:field="*{productLink}" type="text">
+            <div class="invalid-feedback">Please enter a product link.</div>
+        </div>
         <div th:text="${images}">test</div>
         <div class="form-group" th:if="${not #lists.isEmpty(portfolio.images)}">
             <label>Image Urls</label>

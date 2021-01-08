@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-6 " th:each="item, iStat: ${portfolio}">
-            <div class="card p-3 mb-3">
+            <div class="card shadow-sm p-3 mb-3">
                 <div class="alert alert-dark">
                     <h4 class="text-center text-muted font-weight-bold mb-0" th:text="${item.title}">Title</h4>
                 </div>
@@ -61,7 +61,10 @@
                     </ul>
                     <div class="button-bar">
                         <a class="btn btn-primary m-1" href="#" th:href="@{${item.githubLink}}"
-                           th:text="'View '+${item.title}+' on Github'">Github</a>
+                           th:text="'View '+${item.title}+' code on Github'">Github</a>
+                        <a class="btn btn-primary m-1" href="#" th:href="@{${item.productLink}}"
+                           th:if="${item.productLink != null}"
+                           th:text="'View '+${item.title}">View product</a>
                         <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
                            th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>
                         <button class="btn btn-danger m-1" data-target="#deleteModal" data-toggle="modal"
