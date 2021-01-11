@@ -37,5 +37,5 @@ jobs:
           environment_name: Obidex-env
           version_label: Obidex-$BUILD_NUMBER
           region: us-east-1
-          deployment_package: webserver-0.0.1-SNAPSHOT.jar
+          deployment_package: build/libs/webserver-0.0.1-SNAPSHOT.jar
       
