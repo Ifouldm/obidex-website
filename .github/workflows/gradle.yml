@@ -11,9 +11,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -26,6 +26,7 @@ jobs:
         run: ./gradlew build
       - name: Generate build number
         id: buildnumber
+
         uses: einaregilsson/build-number@v3
         with:
           token: ${{secrets.github_token}}
@@ -36,9 +37,8 @@ jobs:
           path: build/libs/*.jar
 
   deploy:
-
+    needs: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Download Jar from archive
         uses: actions/download-artifact@v2
@@ -51,8 +51,9 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: Obidex
           environment_name: Obidex-env
-          version_label: obidex-${{ steps.buildnumber.outputs.build_number }}
+          version_label: obidex-${{needs.build.outputs.build_number}}
+          version_description: ${{github.SHA}}
           region: us-east-1
-          deployment_package: build/libs/webserver-0.0.1-SNAPSHOT.jar
+          deployment_package: *.jar
 
       
