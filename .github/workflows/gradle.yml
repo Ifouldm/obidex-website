@@ -30,10 +30,10 @@ jobs:
         with:
           token: ${{secrets.github_token}}
       - name: Upload Jar to archive
-      uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: obidex-${{ steps.buildnumber.outputs.build_number }}
-          path: build/libs/webserver-0.0.1-SNAPSHOT.jar
+          path: build/libs/*.jar
 
   deploy:
 
@@ -41,18 +41,18 @@ jobs:
 
     steps:
       - name: Download Jar from archive
-      uses: actions/download-artifact@v2
-        with:
-          name: obidex
+        uses: actions/download-artifact@v2
+      - name: Display structure of downloaded files
+        run: ls -R
+      - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
-        - name: Deploy to EB
-          with:
-            aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            application_name: Obidex
-            environment_name: Obidex-env
-            version_label: obidex-${{ steps.buildnumber.outputs.build_number }}
-            region: us-east-1
-            deployment_package: build/libs/webserver-0.0.1-SNAPSHOT.jar
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: Obidex
+          environment_name: Obidex-env
+          version_label: obidex-${{ steps.buildnumber.outputs.build_number }}
+          region: us-east-1
+          deployment_package: build/libs/webserver-0.0.1-SNAPSHOT.jar
 
       
