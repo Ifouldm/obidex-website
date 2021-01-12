@@ -54,6 +54,6 @@ jobs:
           version_label: obidex-${{needs.build.outputs.build_number}}
           version_description: ${{github.SHA}}
           region: us-east-1
-          deployment_package: ./*.jar
+          deployment_package: obidex-${{needs.build.outputs.build_number}}/webserver-0.0.1-SNAPSHOT.jar
 
       
