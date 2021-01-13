@@ -37,11 +37,11 @@ public class StorageServiceImpl implements StorageService {
 
     @Value("${aws.endpoint}")
     private String endpoint;
-    @Value("${aws.accessKey}")
+    @Value("${aws.accessKey:#{environment.AWS_ACCESS_KEY}}")
     private String accessKey;
     @Value("${aws.bucketName}")
     private String bucketName;
-    @Value("${aws.secretKey}")
+    @Value("${aws.secretKey:#{environment.AWS_SECRET_KEY}}")
     private String secretKey;
 
     /**
