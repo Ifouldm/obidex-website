@@ -4,6 +4,7 @@ import com.obidex.webserver.model.Portfolio;
 import com.obidex.webserver.model.PortfolioRepository;
 import com.obidex.webserver.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +41,15 @@ public class PortfolioService {
     }
 
     /**
+     * Add a {@link Portfolio} to the collection
+     *
+     * @param portfolio The {@link Portfolio} to be stored in the database
+     */
+    public void addPortfolio(Portfolio portfolio) {
+        portfolioRepository.save(portfolio);
+    }
+
+    /**
      * Returns all {@link Portfolio} documents as a list unsorted
      *
      * @return List of {@link Portfolio} documents
@@ -72,5 +82,14 @@ public class PortfolioService {
      */
     public String getImagePath() {
         return storageService.getFullPath();
+    }
+
+    /**
+     * Returns all {@link Portfolio} documents as a list sorted by date modified (newest first)
+     *
+     * @return List of {@link Portfolio} documents
+     */
+    public List<Portfolio> findAllByDateModified() {
+        return portfolioRepository.findAll(Sort.by("dateModified").descending());
     }
 }

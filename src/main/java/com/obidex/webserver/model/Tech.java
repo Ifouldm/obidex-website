@@ -21,7 +21,11 @@ public enum Tech {
     CSS("CSS", "fab fa-css3", "#"),
     GOOGLE_CLOUD("Google Cloud", "icon icon-googleCloud", "https://cloud.google.com/"),
     GRADLE("Gradle", "icon icon-gradle", "https://gradle.org/"),
-    PYTHON("Python", "fab fa-python", "https://www.python.org/");
+    PYTHON("Python", "fab fa-python", "https://www.python.org/"),
+    VUE("Vue", "fab fa-vuejs", "https://vuejs.org/"),
+    NODE("Node JS", "fab fa-node", "https://nodejs.org/"),
+    NPM("NPM", "fab fa-npm", "https://www.npmjs.com/"),
+    REACT("React", "fab fa-react", "https://reactjs.org/");
 
     private final String name;
     private String icon;
