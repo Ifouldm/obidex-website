@@ -50,20 +50,20 @@
                     <p class="card-text text-muted" th:utext="${item.description}">Some quick example text to build on
                         the card title and make up the bulk of the card's content.</p>
                     <ul class="list-group pb-3">
-                        <li class="list-group-item d-flex justify-content-between py-1"
-                            th:each="tech: ${item.tech}">
-                            <a class="nav-link" th:href="${tech.getLink()}" th:text="${tech.getName()}">Cras justo
-                                odio</a>
-                            <span class="fa-2x fa-border"
-                                  th:classappend="${tech.getIcon()}"
-                                  th:if="${tech.getIcon() != null}"></span>
-                        </li>
+                        <a class="nav-link nounderline" th:each="tech: ${item.tech}" th:href="${tech.getLink()}">
+                            <li class="list-group-item d-flex justify-content-between py-1">
+                                <div th:text="${tech.getName()}">Cras justo odio</div>
+                                <span class="fa-2x fa-border"
+                                      th:classappend="${tech.getIcon()}"
+                                      th:if="${tech.getIcon() != null}"></span>
+                            </li>
+                        </a>
                     </ul>
                     <div class="button-bar">
                         <a class="btn btn-primary m-1" href="#" th:href="@{${item.githubLink}}"
                            th:text="'View '+${item.title}+' code on Github'">Github</a>
                         <a class="btn btn-primary m-1" href="#" th:href="@{${item.productLink}}"
-                           th:if="${item.productLink != null}"
+                           th:if="${item.productLink != null and item.productLink != ''}"
                            th:text="'View '+${item.title}">View product</a>
                         <a class="btn btn-primary m-1" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
                            th:href="@{/portfolio/add/{id}(id=${item.id})}"><i class="fas fa-edit"></i></a>

@@ -26,13 +26,15 @@
         <div class="form-group col-md-6">
         </div>
         <div class="form-group">
-            <div class="custom-control custom-switch"
-                 th:each="tech_item : ${T(com.obidex.webserver.model.Tech).values()}">
-                <input class="custom-control-input" th:field="*{tech}" th:id="${tech_item}" th:value="${tech_item}"
-                       type="checkbox">
-                <label class="custom-control-label" th:for="${tech_item}" th:text="${tech_item.name}">
-                    Check me out
-                </label>
+            <div class="row">
+                <div class="custom-control custom-switch col-lg-3 col-md-6"
+                     th:each="tech_item : ${T(com.obidex.webserver.model.Tech).values()}">
+                    <input class="custom-control-input" th:field="*{tech}" th:id="${tech_item}" th:value="${tech_item}"
+                           type="checkbox">
+                    <label class="custom-control-label" th:for="${tech_item}" th:text="${tech_item.name}">
+                        Check me out
+                    </label>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -50,11 +52,12 @@
         <div class="form-group">
             <label for="productLink">Product link</label>
             <input class="form-control" id="productLink" name="productLink" placeholder="https://ifouldm.github.io/"
-                   required th:field="*{productLink}" type="text">
+                   th:field="*{productLink}" type="text">
             <div class="invalid-feedback">Please enter a product link.</div>
         </div>
         <div th:text="${images}">test</div>
         <div class="form-group" th:if="${not #lists.isEmpty(portfolio.images)}">
+            <input name="files" type="hidden">
             <label>Image Urls</label>
             <th:block th:each="image, iStat : *{images}">
                 <input class="form-control" th:field="*{images[__${iStat.index}__]}" type="text">

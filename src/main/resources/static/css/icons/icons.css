@@ -63,6 +63,22 @@
  color: #ffd43b;
 }
 
+.fa-react {
+ color: #61dafb;
+}
+
+.fa-vuejs {
+ color: #42b983;
+}
+
+.fa-npm {
+ color: #cb3837;
+}
+
+.fa-node {
+ color: #026e00;
+}
+
 .nounderline {
   text-decoration: none !important
 }

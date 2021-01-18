@@ -17,5 +17,7 @@ public class Portfolio {
     String description;
     String githubLink;
     String productLink;
+    String dateCreated;
+    String dateModified;
 }
 
