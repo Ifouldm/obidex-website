@@ -9,10 +9,10 @@
 </head>
 <body>
 <div th:fragment="banner-std">
-    <div class="jumbotron jumbotron-fluid mb-0"
+    <div class="jumbotron jumbotron-fluid mb-0 px-3"
          style="background-image: url('/images/banner.jpg'); background-size: cover;">
         <a class="nounderline" href="/">
-            <p class="display-4 text-white ml-4"><i class="logo-obidex align-text-bottom m-n1"></i>bidex.com</p>
+            <img alt="Obidex logo Image" class="img-fluid" src="/images/obidex-header.png">
         </a>
         <p class="lead text-white ml-4">Portfolio website by Matthew Ifould</p>
     </div>
@@ -33,6 +33,10 @@
                 </li>
                 <li class="nav-item" th:classappend="${#httpServletRequest.requestURI.contains('bookmark')} ? active">
                     <a class="nav-link" href="#" th:href="@{/bookmarks}">Bookmarks</a>
+                </li>
+                <li class="nav-item"
+                    th:classappend="${#httpServletRequest.requestURI.contains('movieLinker')} ? active">
+                    <a class="nav-link" href="#" th:href="@{/movieLinker}">Movie Linker</a>
                 </li>
             </ul>
             <form action="/logout" class="form-inline" method="post" sec:authorize="isAuthenticated()">

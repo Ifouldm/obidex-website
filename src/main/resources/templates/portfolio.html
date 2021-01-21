@@ -51,7 +51,7 @@
                         the card title and make up the bulk of the card's content.</p>
                     <ul class="list-group pb-3">
                         <a class="nav-link nounderline" th:each="tech: ${item.tech}" th:href="${tech.getLink()}">
-                            <li class="list-group-item d-flex justify-content-between py-1">
+                            <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                 <div th:text="${tech.getName()}">Cras justo odio</div>
                                 <span class="fa-2x fa-border"
                                       th:classappend="${tech.getIcon()}"

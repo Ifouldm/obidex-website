@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 public class RootController {
-
     @GetMapping("/")
     public String getIndex() {
         log.info("Root path reached");
@@ -27,5 +26,10 @@ public class RootController {
         if (error != null)
             model.addAttribute(error);
         return "login";
+    }
+
+    @GetMapping("/movieLinker")
+    public String getMovieLinker() {
+        return "movieLinker";
     }
 }
