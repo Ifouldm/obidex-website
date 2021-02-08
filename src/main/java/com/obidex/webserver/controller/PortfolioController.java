@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 
 @Slf4j
 @Controller
@@ -23,9 +25,10 @@ public class PortfolioController {
     PortfolioService portfolioService;
 
     @GetMapping({"", "/"})
-    public String portfolio(Model model) {
+    public String portfolio(Model model, @RequestParam(required = false) Map<String, String> params) {
+
         model.addAttribute(BUCKET_LOC, portfolioService.getImagePath());
-        model.addAttribute(PORTFOLIO, portfolioService.findAllByDateModified());
+        model.addAttribute(PORTFOLIO, portfolioService.findAll(params));
         return PORTFOLIO_PAGE;
     }
 

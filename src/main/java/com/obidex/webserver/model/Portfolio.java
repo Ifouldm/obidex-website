@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class Portfolio {
     String description;
     String githubLink;
     String productLink;
-    String dateCreated;
-    String dateModified;
+    Date dateCreated;
+    Date dateModified;
 }
 

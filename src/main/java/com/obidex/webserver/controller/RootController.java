@@ -32,4 +32,9 @@ public class RootController {
     public String getMovieLinker() {
         return "movieLinker";
     }
+
+    @GetMapping("/roadmap")
+    public String getRoadmap() {
+        return "roadmap";
+    }
 }

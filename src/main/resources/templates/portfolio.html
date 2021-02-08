@@ -15,8 +15,20 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12 col-lg-6 " th:each="item, iStat: ${portfolio}">
-            <div class="card shadow-sm p-3 mb-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="techFilter">Filter by Technology:</label>
+            </div>
+            <select class="custom-select" id="techFilter">
+                <th:block th:each="tech: ${T(com.obidex.webserver.model.Tech).values()}">
+                    <option th:text="${tech.name}" th:value="${tech.name}">Tech Name</option>
+                </th:block>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-6 mb-3" th:each="item, iStat: ${portfolio}">
+            <div class="card shadow-sm p-3 h-100">
                 <div class="alert alert-dark">
                     <h4 class="text-center text-muted font-weight-bold mb-0" th:text="${item.title}">Title</h4>
                 </div>
@@ -49,6 +61,10 @@
                     <h4 class="card-title font-weight-bold" th:text="${item.title}">Title</h4>
                     <p class="card-text text-muted" th:utext="${item.description}">Some quick example text to build on
                         the card title and make up the bulk of the card's content.</p>
+                    <span class="badge bg-light p-2 mb-2">
+                        Date created: <time datetime="item.dateCreated"
+                                            th:text="${#dates.format(item.dateCreated, 'dd-MMM-yyyy')}"></time>
+                    </span>
                     <ul class="list-group pb-3">
                         <a class="nav-link nounderline" th:each="tech: ${item.tech}" th:href="${tech.getLink()}">
                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
@@ -104,7 +120,9 @@
         var modal = $(this)
         modal.find('.btn-danger').attr('href', '/portfolio/delete/'+recipient)
     })
-
+    $('#techFilter').on('change', function (event) {
+        window.location.search = 'filterBy='+this.value;
+    });
 </script>
 <footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">
     ...

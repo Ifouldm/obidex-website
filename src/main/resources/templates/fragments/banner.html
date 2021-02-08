@@ -38,6 +38,10 @@
                     th:classappend="${#httpServletRequest.requestURI.contains('movieLinker')} ? active">
                     <a class="nav-link" href="#" th:href="@{/movieLinker}">Movie Linker</a>
                 </li>
+                <li class="nav-item"
+                    th:classappend="${#httpServletRequest.requestURI.contains('chess')} ? active">
+                    <a class="nav-link" href="#" th:href="@{http://chess.obidex.com}">Chess</a>
+                </li>
             </ul>
             <form action="/logout" class="form-inline" method="post" sec:authorize="isAuthenticated()">
                 <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>

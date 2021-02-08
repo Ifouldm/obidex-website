@@ -18,25 +18,33 @@
         </p>
         <p>
             I have been working in sales and supervisory roles since I left university but I recently decided to leave
-            my job this June to re-educate myself in software engineering with a goal of getting a position as an
-            application developer. Since then I have spent typical working hours studying new technologies
-            using online learning as well as updating my existing experience in programming languages I was already
-            familiar with. I have completed several online courses and certifications during this time.
-            I have also been developing hobby projects using this acquired knowledge, which are available to view on the
-            <a href="/portfolio">portfolio</a> section of this website.
+            my job to re-educate myself in software engineering with a goal of getting a position as an software
+            developer. Since then I have spent typical working hours learning new technologies using online resources.
+            In
+            addition to this I have been updating my existing skills in programming languages I was already familiar
+            with. I have
+            completed several online courses and certifications during this time. I have also been developing hobby
+            projects using this acquired knowledge, which are available to view in the <a
+                href="/portfolio">portfolio</a>
+            section of this website.
         </p>
         <p>
-            I have taken a particular interest in mobile applications and web related development and decided to learn
-            the Flutter framework and Dart language to simultaneously develop native applications for the IOS and
-            Android platforms. I have used various libraries and APIs to develop several applications giving me a good
-            understanding of reactive development, responsive design as well as the associated tools and resources. I am
-            however still interested in developing my knowledge of platform specific development which I am currently
-            working on.
+            I have taken a particular interest in web development and decided to learn the the Flutter framework and
+            Dart language to simultaneously develop native applications for the IOS and Android platforms. I have used
+            various libraries and APIs to develop several applications giving me a good understanding of reactive
+            development, responsive design as well as exposure to many multi-platform tools and resources. I am however
+            still interested in expanding my knowledge in this area.
+        </p>
+        <p>
+            From here I have continued to expand my full-stack knowledge following a web-developer <a href="/roadmap">roadmap</a>.
+            I have developed my existing JavaScript knowledge to ES6+ and gained familiarity with Node.js, Express, NPM,
+            Jest, Vue, React and others.
         </p>
         <p>
             One of my aims while educating myself was to get a broader understanding of fundamentals, architectures and
             design patterns which is why I decided to learn the Spring Framework, this has given me knowledge of many
-            new (to me at least) concepts, such as Microservices, Inversion of Control, MVC, ORM, RESTful services.
+            new (to me at least) concepts, such as Microservices, Inversion of Control, MVC, ORM, RESTful services. I
+            used the Spring framework to develop this website and several services within.
         </p>
 
         <h5 class="font-weight-bold">Languages & Technologies</h5>
@@ -44,28 +52,33 @@
             <li>Java</li>
             <li>Python</li>
             <li>Dart</li>
-            <li>MongoDB</li>
-            <li>HTML, CSS & JavaScript</li>
-            <li>SQL</li>
-            <li>Google Cloud & Firebase</li>
-            <li>AWS</li>
+            <li>JavaScript</li>
+            <li>MongoDB & SQL</li>
+            <li>HTML & CSS</li>
+            <li>AWS, Google Cloud & Firebase</li>
         </ul>
         <h5 class="font-weight-bold">Libraries & Frameworks</h5>
         <ul>
-            <li>Spring:
+            <li>Java:
                 <ul>
-                    <li>Spring MVC</li>
-                    <li>Spring Web</li>
-                    <li>Spring Security</li>
-                    <li>Swagger</li>
-                    <li>Actuator</li>
+                    <li>Spring: MVC, Web, Security, Swagger, Actuator</li>
+                    <li>Thymeleaf</li>
+                    <li>JUnit</li>
+                    <li>Lombok</li>
+                    <li>Gradle</li>
+                    <li>Maven</li>
                 </ul>
             </li>
-            <li>JUnit</li>
-            <li>Lombok</li>
-            <li>Gradle</li>
-            <li>Maven</li>
-            <li>Django</li>
+            <li>JavaScript:
+                <ul>
+                    <li>Node.js</li>
+                    <li>Express</li>
+                    <li>Jest</li>
+                    <li>JQuery</li>
+                    <li>React</li>
+                    <li>Vue</li>
+                </ul>
+            </li>
             <li>Flutter:
                 <ul>
                     <li>Firebase Cloud Firestore</li>
@@ -74,7 +87,13 @@
                     <li>Firebase Auth</li>
                 </ul>
             </li>
-            <li>Bootstrap, Bulma</li>
+            <li>Others:
+                <ul>
+                    <li>Bootstrap</li>
+                    <li>Bulma</li>
+                    <li>Materialize</li>
+                </ul>
+            </li>
         </ul>
 
         <h3>Matthew Ifould BSc (Hons) Software Engineering</h3>
@@ -90,10 +109,13 @@
     </div>
     <div class="list-group">
         <a class="list-group-item list-group-item-action nounderline" href="#" th:href="@{/console}">
-            Consoles
+            Console Database
         </a>
         <a class="list-group-item list-group-item-action nounderline" href="#" th:href="@{/bookmarks}">Bookmarks</a>
         <a class="list-group-item list-group-item-action nounderline" href="#" th:href="@{/portfolio}">Portfolio</a>
+        <a class="list-group-item list-group-item-action nounderline" href="#" th:href="@{/movieLinker}">Movie
+            Linker</a>
+        <a class="list-group-item list-group-item-action nounderline" href="#" th:href="@{http://chess.obidex.com}">Chess</a>
     </div>
 </div>
 <footer th:replace="fragments/footer :: false ? 'footer-admin' : 'footer-std'">

@@ -4,12 +4,11 @@ import com.obidex.webserver.model.Portfolio;
 import com.obidex.webserver.model.PortfolioRepository;
 import com.obidex.webserver.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The Service class for retrieving, adding, updating, deleting Portfolio records
@@ -52,10 +51,17 @@ public class PortfolioService {
     /**
      * Returns all {@link Portfolio} documents as a list unsorted
      *
+     * @param params a map of all the filters and sorting to be applied
      * @return List of {@link Portfolio} documents
      */
-    public List<Portfolio> findAll() {
-        return portfolioRepository.findAll();
+    public List<Portfolio> findAll(Map<String, String> params) {
+        String filterBy = params.get("filterBy");
+        return portfolioRepository
+                .findAll()
+                .stream()
+                .sorted(Comparator.comparing(Portfolio::getDateCreated).reversed())
+                .filter(portfolio -> filterBy == null || Arrays.asList(portfolio.getTech()).stream().anyMatch(tech -> tech.getName().equals(filterBy)))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -82,14 +88,5 @@ public class PortfolioService {
      */
     public String getImagePath() {
         return storageService.getFullPath();
-    }
-
-    /**
-     * Returns all {@link Portfolio} documents as a list sorted by date modified (newest first)
-     *
-     * @return List of {@link Portfolio} documents
-     */
-    public List<Portfolio> findAllByDateModified() {
-        return portfolioRepository.findAll(Sort.by("dateModified").descending());
     }
 }
