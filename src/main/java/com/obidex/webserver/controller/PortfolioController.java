@@ -26,7 +26,6 @@ public class PortfolioController {
 
     @GetMapping({"", "/"})
     public String portfolio(Model model, @RequestParam(required = false) Map<String, String> params) {
-
         model.addAttribute(BUCKET_LOC, portfolioService.getImagePath());
         model.addAttribute(PORTFOLIO, portfolioService.findAll(params));
         return PORTFOLIO_PAGE;
@@ -48,17 +47,10 @@ public class PortfolioController {
     }
 
     @PostMapping("/add")
-    public String addPortfolio(@ModelAttribute Portfolio portfolio, @RequestParam(value = "file", required = false) MultipartFile[] files) {
-        if (files == null) {
-            log.info("No files to upload");
-            portfolioService.addPortfolio(portfolio);
-        } else {
-            if ((files.length == 1) && (files[0] == null || files[0].isEmpty()))
-                files = new MultipartFile[0];
-            log.info("Form data: {}", portfolio);
-            log.info("Files to upload ({}): {}", files.length, files);
-            portfolioService.addPortfolio(portfolio, files);
-        }
+    public String addPortfolio(@ModelAttribute Portfolio portfolio, @RequestParam(required = false) MultipartFile[] files) {
+        log.info("Form data: {}", portfolio);
+        if (files != null) log.info("Files to upload ({}): {}", files.length, files);
+        portfolioService.addPortfolio(portfolio, files);
         return "redirect:/" + PORTFOLIO_PAGE;
     }
 

@@ -28,23 +28,17 @@ public class PortfolioService {
      * @param files     Array of {@link MultipartFile} to be stored and associated with the Portfolio
      */
     public void addPortfolio(Portfolio portfolio, MultipartFile[] files) {
-        if (portfolio.getImages() == null) {
+        // If there is new images to upload
+        if (files != null && files.length > 0) {
             List<String> images = new ArrayList<>();
             for (MultipartFile file : files) {
                 storageService.store(file);
                 images.add(file.getOriginalFilename());
             }
-            portfolio.setImages(images.toArray(new String[images.size()]));
+            if (portfolio.getImages() != null)
+                images.addAll(Arrays.asList(portfolio.getImages()));
+            portfolio.setImages(images.toArray(new String[0]));
         }
-        portfolioRepository.save(portfolio);
-    }
-
-    /**
-     * Add a {@link Portfolio} to the collection
-     *
-     * @param portfolio The {@link Portfolio} to be stored in the database
-     */
-    public void addPortfolio(Portfolio portfolio) {
         portfolioRepository.save(portfolio);
     }
 
@@ -60,7 +54,7 @@ public class PortfolioService {
                 .findAll()
                 .stream()
                 .sorted(Comparator.comparing(Portfolio::getDateCreated).reversed())
-                .filter(portfolio -> filterBy == null || Arrays.asList(portfolio.getTech()).stream().anyMatch(tech -> tech.getName().equals(filterBy)))
+                .filter(portfolio -> filterBy == null || Arrays.stream(portfolio.getTech()).anyMatch(tech -> tech.getName().equals(filterBy)))
                 .collect(Collectors.toList());
     }
 

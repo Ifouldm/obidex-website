@@ -17,7 +17,9 @@
     <form action="/portfolio/add" class="needs-validation" enctype="multipart/form-data" method="post" novalidate
           th:object="${portfolio}">
         <input th:attr="name=${_csrf.parameterName},value=${_csrf.token}" type="hidden"/>
-        <input th:attr="name=id,value=${id}" type="hidden"/>
+        <input th:attr="name=id,value=${id}" th:if="${id} != null" type="hidden"/>
+        <input th:attr="name=version,value=*{version}" th:if="*{version} != null" type="hidden"/>
+        <input th:attr="name=dateCreated,value=*{dateCreated}" th:if="*{dateCreated} != null" type="hidden"/>
         <div class="form-group">
             <label for="title">Title</label>
             <input class="form-control" id="title" required th:field="*{title}" type="text">
