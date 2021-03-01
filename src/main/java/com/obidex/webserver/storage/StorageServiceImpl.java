@@ -55,7 +55,7 @@ public class StorageServiceImpl implements StorageService {
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, region))
                 .build();
-        fullpath = "http://" + bucketName + '.' + endpoint + '/';
+        fullpath = "https://" + bucketName + '.' + endpoint + '/';
         log.info("S3 bucket path registered to: {}", fullpath);
     }
 
