@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     outputs:
       build_number: ${{ steps.buildnumber.outputs.build_number }}
@@ -58,7 +59,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: Obidex
+          application_name: Obidex-HTTPS
           environment_name: Obidexhttps-env
           version_label: obidex-${{needs.build.outputs.build_number}}
           version_description: ${{github.SHA}}
